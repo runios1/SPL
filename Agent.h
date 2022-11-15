@@ -13,6 +13,8 @@ public:
     int getPartyId() const;
     int getId() const;
     void step(Simulation &);
+    
+    void Duplicate(); //EDIT ME!!!
 
 private:
     int mAgentId;
