@@ -1,9 +1,9 @@
 #pragma once
 #include <string>
+#include "JoinPolicy.h"
 
 using std::string;
 
-class JoinPolicy;
 class Simulation;
 
 enum State
@@ -30,4 +30,7 @@ private:
     int mMandates;
     JoinPolicy *mJoinPolicy;
     State mState;
+
+    int timer;
+    vector<Agent> offers;
 };
