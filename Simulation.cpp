@@ -7,13 +7,22 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgen
 
 void Simulation::step()
 {
-    // TODO: implement this method
+    for(int i=0;i<mGraph.getNumVertices();i++)
+        mGraph.getParty(i).step(*this);
+    for(Agent a:mAgents)
+        a.step(*this);
 }
 
 bool Simulation::shouldTerminate() const
 {
-    // TODO implement this method
-    return true;
+    bool allPartiesJoined=true;
+    for(int i=0;i<mGraph.getNumVertices();i++){
+        if(mGraph.getParty(i).getMandates()>=61)
+            return true;
+        if(mGraph.getParty(i).getState()!=State::Joined)
+            allPartiesJoined=false;
+    }
+    return allPartiesJoined;
 }
 
 const Graph &Simulation::getGraph() const
