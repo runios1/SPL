@@ -1,8 +1,10 @@
 #include "Party.h"
+#include "Agent.h"
 
 Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(name), mMandates(mandates), mJoinPolicy(jp), mState(Waiting) 
 {
-    // You can change the implementation of the constructor, but not the signature!
+    int timer(0);
+    vector<Agent> offers;
 }
 
 State Party::getState() const
@@ -27,5 +29,12 @@ const string & Party::getName() const
 
 void Party::step(Simulation &s)
 {
-    // TODO: implement this method
+    if(mState==State::CollectingOffers){
+        timer++;
+        if(timer==3){
+        mMandates=mJoinPolicy->Join(offers,s);
+        setState(State::Joined);
+    }
 }
+
+
