@@ -1,9 +1,10 @@
 #pragma once
 #include "Simulation.h"
+#include "Coalition.h"
 
 class JoinPolicy {
     public:
-        int Join(const vector<Agent>& offers,Simulation &s);
+        void Join(const vector<Coalition>& offers,int partyMandates);
 };
 
 class MandatesJoinPolicy : public JoinPolicy {};
