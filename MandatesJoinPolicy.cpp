@@ -1,19 +1,18 @@
 #include "include/JoinPolicy.h"
 
-int JoinPolicy::Join(const vector<Agent>& offers,Simulation& s){
-    Graph g=s.getGraph();
+void JoinPolicy::Join(const vector<Coalition>& offers,int partyMandates){
     int maxMend(-1);
-    Agent bestOffer=offers[1];
+    Coalition bestOffer=offers[0];
 
-    for(Agent a : offers){
-        int mandates(g.getMandates(a.getPartyId()));
+    for(Coalition a : offers){
+        int mandates(a.getMandates());
         if(mandates>maxMend){
             maxMend=mandates;
             bestOffer=a;
         }
     }
     // Creates a new agent in the new party in the coalition.
-    bestOffer.Duplicate(); //UPDATE ME 
-    
-    return maxMend;
+    Agent a=*bestOffer.getAgent();
+    Agent b=a.Duplicate(); //UPDATE ME 
+    bestOffer.JoinCoalition(b,partyMandates);
 }
