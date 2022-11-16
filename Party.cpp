@@ -4,7 +4,7 @@
 Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(name), mMandates(mandates), mJoinPolicy(jp), mState(Waiting) 
 {
     int timer(0);
-    vector<Agent> offers;
+    vector<Coalition> offers;
 }
 
 State Party::getState() const
@@ -32,7 +32,7 @@ void Party::step(Simulation &s)
     if(mState==State::CollectingOffers){
         timer++;
         if(timer==3){
-        mMandates=mJoinPolicy->Join(offers,s);
+        mJoinPolicy->Join(offers,mMandates);
         setState(State::Joined);
     }
 }
