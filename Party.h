@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "JoinPolicy.h"
+#include "Coalition.h"
 
 using std::string;
 
@@ -32,5 +33,5 @@ private:
     State mState;
 
     int timer;
-    vector<Agent> offers;
+    vector<Coalition> offers;
 };
