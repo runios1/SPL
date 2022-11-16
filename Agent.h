@@ -14,7 +14,7 @@ public:
     int getId() const;
     void step(Simulation &);
     
-    void Duplicate(); //EDIT ME!!!
+    Agent Duplicate(); //EDIT ME!!!
 
 private:
     int mAgentId;
