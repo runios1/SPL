@@ -14,7 +14,7 @@ public:
     int getId() const;
     void step(Simulation &);
     
-    Agent Duplicate(); //EDIT ME!!!
+    Agent* Cloning(int partyid, int newAgentId);
 
 private:
     int mAgentId;
