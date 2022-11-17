@@ -23,3 +23,5 @@ void Agent::step(Simulation &sim)
 Agent* Agent::Cloning(int pratyid, int newAgentId){
     return new Agent(newAgentId,pratyid,mSelectionPolicy);
 }
+// we need to decide if  to call the constructor with fields or geters functions of the class(Memory management preferences).
+// pay attention that the func returns pointer - so we need to decide where it will be deleted or change the implement
