@@ -4,9 +4,15 @@
 
 class JoinPolicy {
     public:
-        void Join(const vector<Coalition>& offers,int partyMandates);
+    virtual void Join(const vector<Coalition>& offers,int partyMandates, int partyid, int newAgentid);
 };
 
-class MandatesJoinPolicy : public JoinPolicy {};
+class MandatesJoinPolicy : public JoinPolicy {
+public:
+    virtual void Join(const vector<Coalition>& offers,int partyMandates, int partyid,int newAgentid);
+};
 
-class LastOfferJoinPolicy : public JoinPolicy {};
+class LastOfferJoinPolicy : public JoinPolicy {
+public:
+    virtual void Join(const vector<Coalition>& offers,int partyMandates, int partyid,int newAgentid);
+};
