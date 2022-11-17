@@ -2,6 +2,7 @@
 #include <string>
 #include "JoinPolicy.h"
 #include "Coalition.h"
+#include "Simulation.h"
 
 using std::string;
 
