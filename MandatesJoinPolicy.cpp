@@ -1,6 +1,7 @@
 #include "include/JoinPolicy.h"
 
-void JoinPolicy::Join(const vector<Coalition>& offers,int partyMandates){
+//virtual
+void JoinPolicy::Join(const vector<Coalition>& offers,int partyMandates, int partyid, int newAgentid){
     int maxMend(-1);
     Coalition bestOffer=offers[0];
 
@@ -13,6 +14,8 @@ void JoinPolicy::Join(const vector<Coalition>& offers,int partyMandates){
     }
     // Creates a new agent in the new party in the coalition.
     Agent a=*bestOffer.getAgent();
-    Agent b=a.Duplicate(); //UPDATE ME 
-    bestOffer.JoinCoalition(b,partyMandates);
+    Agent *b=a.Cloning(partyid,newAgentid); //UPDATE ME 
+    bestOffer.JoinCoalition(*b,partyMandates);
+    //pay attention that b is a pointer to Agent varible on heap, make sure to find the right place to delete varible from heap
+    //we need to check what happens to '*b' at the end of scope of Join
 }
