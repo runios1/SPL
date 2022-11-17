@@ -20,4 +20,6 @@ void Agent::step(Simulation &sim)
     // TODO: implement this method
 }
 
-Agent Agent::Duplicate(){}
+Agent* Agent::Cloning(int pratyid, int newAgentId){
+    return new Agent(newAgentId,pratyid,mSelectionPolicy);
+}
