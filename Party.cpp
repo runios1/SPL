@@ -32,9 +32,9 @@ void Party::step(Simulation &s)
     if(mState==State::CollectingOffers){
         timer++;
         if(timer==3){
-        mJoinPolicy->Join(offers,mMandates);
+        mJoinPolicy->Join(offers,mMandates,mId,s.getCurrentId());
         setState(State::Joined);
+        }
     }
 }
-
 
