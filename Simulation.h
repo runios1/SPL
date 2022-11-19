@@ -24,7 +24,6 @@ public:
     int getCurrentId();
     Coalition& getCoalition(int coalitionId);
 
-    Graph &getGraph();
     Party& selectByEdgeWeight(int PartyId, int coalitionId);
     Party& selectByMandates(int PartyId, int coalitionId);
 
