@@ -4,17 +4,15 @@
 
 class Coalition{
     public:
-        Coalition(int mandates,Agent& agent){};
+        Coalition(int mandates,Agent& agent, int id);
         
-        void JoinCoalition(Agent& duplicatedAgent,int partyMandates){};
-        Agent* getAgent(){};
-        int getMandates(){};
+        void JoinCoalition(Agent& duplicatedAgent,int partyMandates);
+        Agent* getAgent();
+        int getMandates();
         int getId();
-
 
     private:
         int mMandates;
         vector<Agent> mAgents;
         const int mId;
-
 };
