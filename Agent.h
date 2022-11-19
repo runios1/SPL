@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "Graph.h"
+#include "Party.h"
 #include "SelectionPolicy.h"
 
 
