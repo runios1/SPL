@@ -20,10 +20,9 @@ public:
     const vector<Agent> &getAgents() const;
     const Party &getParty(int partyId) const;
     const vector<vector<int>> getPartiesByCoalitions() const;
-
+    vector<Party> getAdjParties(int AgentId);
     int getCurrentId();
     Coalition& getCoalition(int coalitionId);
-
     Party& selectByEdgeWeight(int PartyId, int coalitionId);
     Party& selectByMandates(int PartyId, int coalitionId);
 
