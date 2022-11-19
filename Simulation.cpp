@@ -65,11 +65,6 @@ Coalition& Simulation::getCoalition(int coalitionId){
 }
 
 
-Graph &Simulation::getGraph() 
-{
-    return mGraph;
-}
-
 //check:
 Party& Simulation::selectByEdgeWeight(int PartyId, int coalitionId){
     int n = mGraph.getNumVertices()-1;
