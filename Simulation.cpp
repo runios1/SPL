@@ -52,8 +52,17 @@ const Party &Simulation::getParty(int partyId) const
 /// At the simulation initialization - the result will be [[agent0.partyId], [agent1.partyId], ...]
 const vector<vector<int>> Simulation::getPartiesByCoalitions() const
 {
-    // TODO: you MUST implement this method for getting proper output, read the documentation above.
-    return vector<vector<int>>();
+    vector<vector<int>> output;
+    for(Coalition c:Coalitions){
+        vector<int> partyIds;
+        for(int i=0;c.getNumAgents()-1;i++){
+            partyIds.push_back(c.getAgent(i)->getPartyId());
+        }
+        output.push_back(partyIds);
+        //NOTICE HERE! IT GOES BY VALUE SO IT'S OK FOR ME TO CLEAR IT RIGHT?
+        partyIds.clear();
+    }
+    return output;
 }
 
 int Simulation::getCurrentId(){
@@ -64,6 +73,11 @@ Coalition& Simulation::getCoalition(int coalitionId){
     return Coalitions[coalitionId];
 }
 
+
+Graph &Simulation::getGraph() 
+{
+    return mGraph;
+}
 
 //check:
 Party& Simulation::selectByEdgeWeight(int PartyId, int coalitionId){
