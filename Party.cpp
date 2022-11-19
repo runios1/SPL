@@ -38,3 +38,16 @@ void Party::step(Simulation &s)
     }
 }
 
+void Party::addToOffers(Coalition& coalition){
+    offers.push_back(coalition);
+}
+
+bool Party::isInOffers(int coalitionId){
+    for(Coalition a : offers){
+        if( coalitionId == a.getId()){
+            return true;
+        }
+    }
+    return false;
+}
+
