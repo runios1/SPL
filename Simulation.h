@@ -20,9 +20,14 @@ public:
     const vector<Agent> &getAgents() const;
     const Party &getParty(int partyId) const;
     const vector<vector<int>> getPartiesByCoalitions() const;
+    
     int getCurrentId();
-
+    Coalition& getCoalition(int coalitionId);
+    Graph &getGraph(); 
+    
 private:
     Graph mGraph;
     vector<Agent> mAgents;
+    vector<Coalition> Coalitions;
+
 };
