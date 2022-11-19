@@ -1,15 +1,42 @@
 #include "Agent.h"
 
+
 Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy)
 {
     mCoalitionId = -1;
-
 }
 
 Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy, int CoalitionId) : mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy),mCoalitionId(CoalitionId)
 {
 }
 
+// copy constructor
+Agent::Agent(const Agent& other): mAgentId(other.mAgentId), mPartyId(other.mPartyId), mSelectionPolicy(other.mSelectionPolicy){
+
+}
+
+// copy assignment 
+Agent& Agent :: operator=(const Agent& other){
+this->mAgentId = other.mAgentId;
+this->mPartyId = other.mPartyId;
+this->mSelectionPolicy = other.mSelectionPolicy;
+return *this;
+}
+
+//destructor
+Agent::~Agent(){
+    delete mSelectionPolicy;
+}
+
+//move constructor
+Agent::Agent(Agent&& other){
+
+}
+
+//move assignment
+Agent& Agent::operator=(Agent&& other){
+
+}
 
 int Agent::getId() const
 {
@@ -28,10 +55,8 @@ void Agent::step(Simulation &sim)
 }
 
 Agent* Agent::Cloning(int pratyid, int newAgentId, int CoalitionId){
-    return new Agent(newAgentId,pratyid,mSelectionPolicy, CoalitionId);
+    return new Agent(newAgentId,pratyid,mSelectionPolicy, CoalitionId);;
 }
-// we need to decide if  to call the constructor with fields or geters functions of the class(Memory management preferences).
-// pay attention that the func returns pointer - so we need to decide where it will be deleted or change the implement
 
 int Agent:: getCoalitionId() const{
     return mCoalitionId;
