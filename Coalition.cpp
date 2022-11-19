@@ -16,3 +16,7 @@ Agent* Coalition::getAgent(){
 int Coalition::getMandates(){
     return mMandates;
 }
+
+int Coalition::getId(){
+    return mId;
+}
