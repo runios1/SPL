@@ -14,6 +14,9 @@ public:
     const Party &getParty(int partyId) const;
     
     Party &getParty(int partyId);
+       const Party& selectByEdgeWeight(int PartyId, int coalitionId);
+    const Party& selectByMandates(int PartyId, int coalitionId);
+
 
 private:
     vector<Party> mVertices;
