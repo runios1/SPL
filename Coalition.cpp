@@ -1,6 +1,6 @@
 #include "include/Coalition.h"
 
-Coalition:: Coalition(int mandates,Agent& agent) : mMandates(mandates){
+Coalition:: Coalition(int mandates,Agent& agent, int id) : mMandates(mandates), mId(id){
     mAgents.push_back(agent);
 }
 
