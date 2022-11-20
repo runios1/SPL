@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include "JoinPolicy.h"
-#include "Coalition.h"
 
 using std::string;
 
