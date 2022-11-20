@@ -1,11 +1,12 @@
 #include "Simulation.h"
+#include "Graph.h"
 
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents) 
 {
     int i = 0;
     for( Agent& a : agents){
         a.setCoalitionId(i);
-        Coalitions.push_back(Coalition(mGraph.getMandates(a.getPartyId()), a, i));
+        coalitions.push_back(Coalition(mGraph.getMandates(a.getPartyId()), a, i));
         i++;
     }
     // You can change the implementation of the constructor, but not the signature!
@@ -52,8 +53,17 @@ const Party &Simulation::getParty(int partyId) const
 /// At the simulation initialization - the result will be [[agent0.partyId], [agent1.partyId], ...]
 const vector<vector<int>> Simulation::getPartiesByCoalitions() const
 {
-    // TODO: you MUST implement this method for getting proper output, read the documentation above.
-    return vector<vector<int>>();
+    vector<vector<int>> output;
+    for(Coalition c:coalitions){
+        vector<int> partyIds;
+        for(int i=0;c.getNumAgents()-1;i++){
+            partyIds.push_back(c.getAgent(i)->getPartyId());
+        }
+        output.push_back(partyIds);
+        //NOTICE HERE! IT GOES BY VALUE SO IT'S OK FOR ME TO CLEAR IT RIGHT?
+        partyIds.clear();
+    }
+    return output;
 }
 
 int Simulation::getCurrentId(){
@@ -61,9 +71,8 @@ int Simulation::getCurrentId(){
 }
 
 Coalition& Simulation::getCoalition(int coalitionId){
-    return Coalitions[coalitionId];
+    return coalitions[coalitionId];
 }
-
 
 //check:
 Party& Simulation::selectByEdgeWeight(int PartyId, int coalitionId){
