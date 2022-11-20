@@ -6,6 +6,48 @@ Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName
 {
 }
 
+// copy constructor
+Party::Party(const Party& other): mId(other.mId), mName(other.mName), mMandates(other.mMandates), mJoinPolicy(other.mJoinPolicy), mState(other.mState), timer(other.timer), offers(other.offers){
+
+}
+
+// copy assignment 
+Party& Party :: operator=(const Party& other){
+this->mId = other.mId;
+this->mName = other.mName;
+this->mMandates = other.mMandates;
+this->mJoinPolicy = other.mJoinPolicy;
+this->mState = other.mState;
+this->timer = other.timer;
+this->offers = other.offers;
+
+return *this;
+}
+
+//destructor
+Party::~Party(){
+    delete mJoinPolicy;
+}
+
+
+//move constructor
+Party::Party(Party&& other) noexcept : mId(other.mId), mName(other.mName), mMandates(other.mMandates), mJoinPolicy(other.mJoinPolicy), mState(other.mState), timer(other.timer), offers(other.offers)
+{ 
+    other.mJoinPolicy=nullptr;
+}
+
+//move assignment
+Party& Party::operator=(Party&& other) noexcept
+{ 
+    mId=other.mId;
+    mName=other.mName;
+    mJoinPolicy=other.mJoinPolicy;
+    mJoinPolicy=other.mJoinPolicy;
+    other.mJoinPolicy=nullptr;
+    return *this;
+}
+
+
 State Party::getState() const
 {
     return mState;
