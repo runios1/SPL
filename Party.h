@@ -19,11 +19,11 @@ public:
     Party(int id, string name, int mandates, JoinPolicy *); 
 
     //The Rule Of 5:
-    Party(const Party& other); //copy constructor
-    Party& operator = (const Party& other); //copy assignment
-    virtual ~Party(); //destructor
-    Party(Party&& other); //move constructor
-    Party& operator = (Party&& other); //move assignment
+    Party(const Party& other); // copy constructor
+    Party& operator = (const Party& other); // copy assignment
+    virtual ~Party(); // destructor
+    Party(Party&& other) noexcept; // move constuctor
+    Party& operator = (Party&& other) noexcept; // move assignment
 
 
 
@@ -45,4 +45,3 @@ private:
     int timer;
     vector <Coalition> offers;
 };
-
