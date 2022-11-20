@@ -1,10 +1,10 @@
 #pragma once
 
 #include <vector>
+#include <string>
 #include "Agent.h"
 #include "Graph.h"
 
-class Agent;
 class Party;
 class Coalition;
 
