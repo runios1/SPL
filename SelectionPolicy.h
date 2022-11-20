@@ -1,8 +1,6 @@
 #pragma once
-#include "Simulation.h"
 #include "Party.h"
 
-class Party;
 class Simulation;
 
 class SelectionPolicy {
