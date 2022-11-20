@@ -1,4 +1,6 @@
 #include "Agent.h"
+#include "Simulation.h"
+#include "SelectionPolicy.h"
 
 
 Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy) ,mCoalitionId(-1)
