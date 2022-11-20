@@ -1,9 +1,7 @@
 #include "SelectionPolicy.h"
-
+#include "Simulation.h"
 
 Party& SelectionPolicy:: Select(int partyID, int coalitionId ,Simulation& sim){
-    Party temp = sim.selectByEdgeWeight(partyID,coalitionId);
-   //sim.getCoalition(coalitionId);
+    Party& output = sim.selectByEdgeWeight(partyID,coalitionId);
+    return output;
 }
-
-
