@@ -1,7 +1,8 @@
 #include "Simulation.h"
-#include "Graph.h"
+#include "Coalition.h"
+#include "Party.h"
 
-Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents) 
+Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents), coalitions()
 {
     int i = 0;
     for( Agent& a : agents){
