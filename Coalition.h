@@ -1,6 +1,10 @@
 #pragma once
-#include "vector"
+#include <vector>
 #include "Agent.h"
+
+class Agent;
+
+using std::vector;
 
 class Coalition{
     public:
