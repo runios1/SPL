@@ -1,7 +1,7 @@
 #include "JoinPolicy.h"
 
 //virtual
-void JoinPolicy::Join(const vector<Coalition>& offers,int partyMandates, int partyid, int newAgentid){
+void MandatesJoinPolicy::Join(const vector<Coalition>& offers,int partyMandates, int partyid, int newAgentid){
     int maxMend(-1);
     Coalition bestOffer=offers[0];
 
