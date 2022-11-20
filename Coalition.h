@@ -2,8 +2,6 @@
 #include <vector>
 #include "Agent.h"
 
-class Agent;
-
 using std::vector;
 
 class Coalition{
@@ -20,5 +18,5 @@ class Coalition{
     private:
         int mMandates;
         vector<Agent> mAgents;
-        const int mId;
+        int mId;
 };
