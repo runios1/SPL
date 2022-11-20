@@ -1,11 +1,12 @@
 #include "Simulation.h"
+#include "Graph.h"
 
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents) 
 {
     int i = 0;
     for( Agent& a : agents){
         a.setCoalitionId(i);
-        Coalitions.push_back(Coalition(mGraph.getMandates(a.getPartyId()), a, i));
+        coalitions.push_back(Coalition(mGraph.getMandates(a.getPartyId()), a, i));
         i++;
     }
     // You can change the implementation of the constructor, but not the signature!
@@ -53,7 +54,7 @@ const Party &Simulation::getParty(int partyId) const
 const vector<vector<int>> Simulation::getPartiesByCoalitions() const
 {
     vector<vector<int>> output;
-    for(Coalition c:Coalitions){
+    for(Coalition c:coalitions){
         vector<int> partyIds;
         for(int i=0;c.getNumAgents()-1;i++){
             partyIds.push_back(c.getAgent(i)->getPartyId());
@@ -70,7 +71,7 @@ int Simulation::getCurrentId(){
 }
 
 Coalition& Simulation::getCoalition(int coalitionId){
-    return Coalitions[coalitionId];
+    return coalitions[coalitionId];
 }
 
 //check:
