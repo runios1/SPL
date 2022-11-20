@@ -2,10 +2,9 @@
 
 #include <vector>
 #include "Graph.h"
-#include "Party.h"
 #include "SelectionPolicy.h"
 
-
+class Simulation;
 class SelectionPolicy;
 
 class Agent
@@ -18,12 +17,12 @@ public:
     Agent(const Agent& other); // copy constructor
     Agent& operator = (const Agent& other); // copy assignment
     virtual ~Agent(); // destructor
-    Agent(Agent&& other); // move constuctor
-    Agent& operator = (Agent&& other); // move assignment
+    Agent(Agent&& other) noexcept; // move constuctor
+    Agent& operator = (Agent&& other) noexcept; // move assignment
 
     int getPartyId() const;
     int getId() const;
-    void step(Simulation &);
+    void step(Simulation & sim);
     Agent* Cloning(int partyid, int newAgentId, int CoalitionId);
     int getCoalitionId() const;
     void setCoalitionId(int coalitionId);

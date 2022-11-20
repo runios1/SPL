@@ -1,4 +1,4 @@
-#include "include/JoinPolicy.h"
+#include "JoinPolicy.h"
 
 //virtual
 void JoinPolicy::Join(const vector<Coalition>& offers,int partyMandates, int partyid, int newAgentid){
