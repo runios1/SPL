@@ -1,10 +1,9 @@
 #include "Party.h"
 #include "Agent.h"
+#include "Simulation.h"
 
-Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(name), mMandates(mandates), mJoinPolicy(jp), mState(Waiting) 
+Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(name), mMandates(mandates), mJoinPolicy(jp), mState(Waiting) ,timer(0),offers()
 {
-    int timer(0);
-    vector<Coalition> offers;
 }
 
 State Party::getState() const
