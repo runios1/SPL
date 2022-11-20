@@ -1,11 +1,7 @@
 #pragma once
 
-#include <vector>
-#include "Graph.h"
-#include "SelectionPolicy.h"
-
-class Simulation;
 class SelectionPolicy;
+class Simulation;
 
 class Agent
 {
