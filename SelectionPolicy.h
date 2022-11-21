@@ -5,7 +5,7 @@ class Simulation;
 
 class SelectionPolicy {
 public:
-    virtual Party& Select(int PartyId, int coalitionId, Simulation& sim);
+    virtual Party& Select(int PartyId, int coalitionId, Simulation& sim)=0;
 
     virtual ~SelectionPolicy()=default;
 };
