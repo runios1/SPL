@@ -3,7 +3,7 @@
 
 class JoinPolicy {
     public:
-    virtual void Join(const vector <Coalition> & offers,int partyMandates, int partyid, int newAgentid);
+    virtual void Join(const vector <Coalition> & offers,int partyMandates, int partyid, int newAgentid)=0;
 
     virtual ~JoinPolicy()=default;
 };
