@@ -13,14 +13,22 @@ Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy, int Coa
 
 // copy constructor
 Agent::Agent(const Agent& other): mAgentId(other.mAgentId), mPartyId(other.mPartyId), mSelectionPolicy(nullptr), mCoalitionId(other.mCoalitionId){
-    mSelectionPolicy = other.setSelectionType();
+if(other.mSelectionPolicy->getType()=="M")
+    mSelectionPolicy=new MandatesSelectionPolicy;
+else
+    mSelectionPolicy=new EdgeWeightSelectionPolicy;
 }
 
 // copy assignment 
 Agent& Agent :: operator=(const Agent& other){
 this->mAgentId = other.mAgentId;
 this->mPartyId = other.mPartyId;
-this->mSelectionPolicy = other.setSelectionType();
+
+if(other.mSelectionPolicy->getType()=="M")
+    mSelectionPolicy=new MandatesSelectionPolicy;
+else
+    mSelectionPolicy=new EdgeWeightSelectionPolicy;
+
 return *this;
 }
 
@@ -62,8 +70,7 @@ void Agent::step(Simulation &sim)
 }
 
 Agent* Agent::Cloning(int pratyid, int newAgentId, int CoalitionId){
-
-    Agent a= Agent(newAgentId,pratyid, setSelectionType(), CoalitionId);
+   Agent a= Agent(newAgentId,pratyid, mSelectionPolicy, CoalitionId);
     return &a;
 }
 
@@ -74,14 +81,3 @@ int Agent:: getCoalitionId() const{
 void Agent::setCoalitionId(int coalitionId){
      mCoalitionId = coalitionId;
 }
-
-SelectionPolicy* Agent:: setSelectionType() const{
-    SelectionPolicy* tmp;
-    if(mSelectionPolicy->getType() =="M"){
-        tmp = new MandatesSelectionPolicy;
-    }
-    if(mSelectionPolicy->getType()=="E"){
-        tmp = new EdgeWeightSelectionPolicy;
-    }
-    return tmp;
- }
