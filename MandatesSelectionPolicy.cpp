@@ -5,3 +5,6 @@ Party& MandatesSelectionPolicy:: Select(int PartyId, int coalitionId,Simulation&
     Party& output = sim.selectByMandates(PartyId,coalitionId);
     return output;
 }
+string MandatesSelectionPolicy::getType(){
+    return "M";
+}
