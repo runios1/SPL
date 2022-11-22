@@ -1,7 +1,11 @@
 #pragma once
+#include <string>
 
 class SelectionPolicy;
 class Simulation;
+
+using std::string;
+
 
 class Agent
 {
@@ -22,6 +26,7 @@ public:
     Agent* Cloning(int partyid, int newAgentId, int CoalitionId);
     int getCoalitionId() const;
     void setCoalitionId(int coalitionId);
+    SelectionPolicy* setSelectionType() const;
 
 private:
     int mAgentId;
