@@ -5,3 +5,7 @@ Party& EdgeWeightSelectionPolicy:: Select(int partyID, int coalitionId ,Simulati
     Party& output = sim.selectByEdgeWeight(partyID,coalitionId);
     return output;
 }
+
+string EdgeWeightSelectionPolicy::getType(){
+    return "E";
+}
