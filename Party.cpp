@@ -6,10 +6,16 @@ Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName
 {
 }
 
-// copy constructor
-Party::Party(const Party& other): mId(other.mId), mName(other.mName), mMandates(other.mMandates), mJoinPolicy(nullptr), mState(other.mState), timer(other.timer), offers(other.offers){
+//copy constructor
+Party::Party(const Party& other): mId(other.mId), mName(other.mName), mMandates(other.mMandates),mJoinPolicy(nullptr), mState(other.mState), timer(other.timer), offers(){
+    if(other.mJoinPolicy->getType()=="M")
+        mJoinPolicy=new MandatesJoinPolicy;
+    else
+        mJoinPolicy=new LastOfferJoinPolicy;
 
-    mJoinPolicy = other.setJoinType();
+    for(Coalition c:other.offers){
+        offers.push_back(c);
+    }
 }
 
 // copy assignment 
@@ -17,10 +23,19 @@ Party& Party :: operator=(const Party& other){
 this->mId = other.mId;
 this->mName = other.mName;
 this->mMandates = other.mMandates;
-this->mJoinPolicy =  other.setJoinType();
+//this->mJoinPolicy = other.mJoinPolicy;
+
+if(other.mJoinPolicy->getType()=="M")
+        mJoinPolicy=new MandatesJoinPolicy;
+    else
+        mJoinPolicy=new LastOfferJoinPolicy;
+
 this->mState = other.mState;
 this->timer = other.timer;
-this->offers = other.offers;
+
+for(Coalition c:other.offers){
+   offers.push_back(c);
+}
 
 return *this;
 }
@@ -32,7 +47,7 @@ Party::~Party(){
 
 
 //move constructor
-Party::Party(Party&& other) noexcept : mId(other.mId), mName(other.mName), mMandates(other.mMandates), mJoinPolicy(other.mJoinPolicy), mState(other.mState), timer(other.timer), offers(other.offers)
+Party::Party(Party&& other) noexcept : mId(other.mId), mName(other.mName), mMandates(other.mMandates),mJoinPolicy(other.mJoinPolicy), mState(other.mState), timer(other.timer), offers(other.offers)
 { 
     other.mJoinPolicy=nullptr;
 }
@@ -44,6 +59,7 @@ Party& Party::operator=(Party&& other) noexcept
     mName=other.mName;
     mJoinPolicy=other.mJoinPolicy;
     other.mJoinPolicy=nullptr;
+    
     return *this;
 }
 
@@ -92,13 +108,3 @@ bool Party::isInOffers(int coalitionId){
     return false;
 }
 
-JoinPolicy* Party:: setJoinType() const{
-    JoinPolicy* tmp;
-    if(mJoinPolicy->getType() =="M"){
-        tmp = new MandatesJoinPolicy;
-    }
-    if(mJoinPolicy->getType() =="L"){
-        tmp = new LastOfferJoinPolicy;
-    }
-    return tmp;
-}
