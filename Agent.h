@@ -19,7 +19,7 @@ public:
     int getPartyId() const;
     int getId() const;
     void step(Simulation & sim);
-    Agent* Cloning(int partyid, int newAgentId, int CoalitionId);
+    Agent Cloning(int partyid, int newAgentId, int CoalitionId);
     int getCoalitionId() const;
     void setCoalitionId(int coalitionId);
 
