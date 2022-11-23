@@ -34,7 +34,7 @@ public:
     const string &getName() const;
     int getIdOfParty() const;
     void addToOffers(Coalition& coalition);
-    bool isInOffers(int coalitionId);
+    bool isInOffers(int coalitionId) const;
 
 private:
     int mId;
