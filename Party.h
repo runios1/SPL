@@ -36,9 +36,6 @@ public:
     void addToOffers(Coalition& coalition);
     bool isInOffers(int coalitionId);
 
-    JoinPolicy* setJoinType() const;
-
-
 private:
     int mId;
     string mName;
