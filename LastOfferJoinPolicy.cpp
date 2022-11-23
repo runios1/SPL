@@ -5,7 +5,7 @@ void LastOfferJoinPolicy::Join(vector<Coalition>& offers, int partyMandates, int
     Coalition& bestOffer= offers[offers.size()-1];
 
     // Creates a new agent in the new party in the coalition.
-    Agent a=bestOffer.getAgent();
+    Agent a=*bestOffer.getAgent();
     Agent b=std::move(a.Cloning(partyid,newAgentid,a.getCoalitionId()));
     bestOffer.JoinCoalition(b,partyMandates);
 } 
