@@ -1,8 +1,8 @@
 #include "JoinPolicy.h"
 
 //virtual
-void LastOfferJoinPolicy::Join(const vector<Coalition>& offers, int partyMandates, int partyid, int newAgentid){
-    Coalition bestOffer(offers[offers.size()]);
+void LastOfferJoinPolicy::Join(vector<Coalition>& offers, int partyMandates, int partyid, int newAgentid){
+    Coalition& bestOffer= offers[offers.size()-1];
 
     // Creates a new agent in the new party in the coalition.
     Agent a=*bestOffer.getAgent();
