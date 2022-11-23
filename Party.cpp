@@ -101,7 +101,7 @@ void Party::addToOffers(Coalition& coalition){
         setState(State::CollectingOffers);
 }
 
-bool Party::isInOffers(int coalitionId){
+bool Party::isInOffers(int coalitionId) const{
     for(Coalition a : offers){
         if( coalitionId == a.getId()){
             return true;
