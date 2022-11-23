@@ -61,7 +61,6 @@ const vector<vector<int>> Simulation::getPartiesByCoalitions() const
             partyIds.push_back(c.getAgent(i)->getPartyId());
         }
         output.push_back(partyIds);
-        //NOTICE HERE! IT GOES BY VALUE SO IT'S OK FOR ME TO CLEAR IT RIGHT?
         partyIds.clear();
     }
     return output;
@@ -79,57 +78,57 @@ Coalition& Simulation::getCoalition(int coalitionId){
 Party& Simulation::selectByEdgeWeight(int PartyId, int coalitionId){
     int n = mGraph.getNumVertices()-1;
 int maxWeight = -1;
-Party* bestselect = &(mGraph.getParty(PartyId));
+Party& bestselect = mGraph.getParty(PartyId);
 for(int i=0; i < n; i++){
     int edgeWeight = mGraph.getEdgeWeight(PartyId,i);
     if(edgeWeight>0){
-        Party temp = getParty(i);
+        Party& temp = mGraph.getParty(i);
         if(temp.getState()!=State::Joined){
             if(edgeWeight > maxWeight){
                 if(temp.getState()==State::CollectingOffers){
                     if(!temp.isInOffers(coalitionId)){
                     maxWeight = edgeWeight;
-                    bestselect = &temp;
+                    bestselect = temp;
                     }
                 }
                 else{
                     //state Waiting
                     maxWeight = edgeWeight;
-                    bestselect = &temp;
+                    bestselect = temp;
                 }
             }
         }
     }
 }
-return (*bestselect);
+return (bestselect);
 }
 
 Party& Simulation::selectByMandates(int PartyId, int coalitionId){
 
 int n =  mGraph.getNumVertices()-1;
 int maxMand = -1;
-Party* bestselect = &(mGraph.getParty(PartyId));
+Party& bestselect = mGraph.getParty(PartyId);
 
 for(int i=0; i < n; i++){
     if(mGraph.getEdgeWeight(PartyId,i)>0){
-        Party temp = getParty(i);
+        Party& temp = mGraph.getParty(i);
         if(temp.getState()!=State::Joined){
             if(temp.getMandates() > maxMand){
                 if(temp.getState()==State::CollectingOffers){
                     if(!temp.isInOffers(coalitionId)){
                     maxMand = temp.getMandates();
-                    bestselect = &temp;
+                    bestselect = temp;
                     }
                 }
                 else{
                     //state Waiting
                     maxMand = temp.getMandates();
-                    bestselect = &temp;
+                    bestselect = temp;
                 }
             }
         }
     }
 }
-return (*bestselect);
+return (bestselect);
 
 }
