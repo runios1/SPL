@@ -88,7 +88,7 @@ void Party::step(Simulation &s)
 {
     if(mState==State::CollectingOffers){
         timer++;
-        if(timer==3){
+        if(timer==4){
         mJoinPolicy->Join(offers,mMandates,mId,s.getCurrentId());
         setState(State::Joined);
         }
@@ -97,6 +97,8 @@ void Party::step(Simulation &s)
 
 void Party::addToOffers(Coalition& coalition){
     offers.push_back(coalition);
+    if(mState==State::Waiting)
+        setState(State::CollectingOffers);
 }
 
 bool Party::isInOffers(int coalitionId){
