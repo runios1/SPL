@@ -14,9 +14,8 @@ void MandatesJoinPolicy::Join(const vector<Coalition>& offers,int partyMandates,
     }
     // Creates a new agent in the new party in the coalition.
     Agent a=*bestOffer.getAgent();
-    Agent* b=a.Cloning(partyid,newAgentid,a.getCoalitionId()); 
-    bestOffer.JoinCoalition(*b,partyMandates);
-    delete b;
+    Agent b=a.Cloning(partyid,newAgentid,a.getCoalitionId()); 
+    bestOffer.JoinCoalition(b,partyMandates);
 }
 
 string MandatesJoinPolicy::getType(){
