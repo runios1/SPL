@@ -6,7 +6,7 @@ using std::string;
 
 class JoinPolicy {
     public:
-    virtual void Join(const vector <Coalition> & offers,int partyMandates, int partyid, int newAgentid)=0;
+    virtual void Join(vector <Coalition> & offers,int partyMandates, int partyid, int newAgentid)=0;
     
     virtual string getType()=0;
 
@@ -15,12 +15,12 @@ class JoinPolicy {
 
 class MandatesJoinPolicy : public JoinPolicy {
 public:
-    virtual void Join(const vector <Coalition> & offers,int partyMandates, int partyid,int newAgentid);
+    virtual void Join(vector <Coalition> & offers,int partyMandates, int partyid,int newAgentid);
     virtual string getType();
 };
 
 class LastOfferJoinPolicy : public JoinPolicy {
 public:
-    virtual void Join(const vector <Coalition> & offers,int partyMandates, int partyid,int newAgentid);
+    virtual void Join(vector <Coalition> & offers,int partyMandates, int partyid,int newAgentid);
     virtual string getType();
 };
