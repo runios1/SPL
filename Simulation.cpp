@@ -5,7 +5,7 @@
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents), coalitions()
 {
     int i = 0;
-    for( Agent& a : agents){
+    for( Agent& a : mAgents){
         a.setCoalitionId(i);
         coalitions.push_back(Coalition(mGraph.getMandates(a.getPartyId()), a, i));
         i++;
@@ -76,7 +76,7 @@ Coalition& Simulation::getCoalition(int coalitionId){
 
 //check:
 Party& Simulation::selectByEdgeWeight(int PartyId, int coalitionId){
-    int n = mGraph.getNumVertices()-1;
+    int n = mGraph.getNumVertices();
 int maxWeight = -1;
 Party& bestselect = mGraph.getParty(PartyId);
 for(int i=0; i < n; i++){
@@ -105,7 +105,7 @@ return (bestselect);
 
 Party& Simulation::selectByMandates(int PartyId, int coalitionId){
 
-int n =  mGraph.getNumVertices()-1;
+int n =  mGraph.getNumVertices();
 int maxMand = -1;
 Party& bestselect = mGraph.getParty(PartyId);
 
