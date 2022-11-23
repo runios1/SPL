@@ -69,9 +69,9 @@ void Agent::step(Simulation &sim)
     temp.addToOffers(sim.getCoalition(mCoalitionId));
 }
 
-Agent* Agent::Cloning(int pratyid, int newAgentId, int CoalitionId){
+Agent Agent::Cloning(int pratyid, int newAgentId, int CoalitionId){
    Agent a= Agent(newAgentId,pratyid, mSelectionPolicy, CoalitionId);
-    return &a;
+    return a;
 }
 
 int Agent:: getCoalitionId() const{
