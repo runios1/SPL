@@ -76,8 +76,15 @@ void Agent::step(Simulation &sim)
 }
 
 Agent Agent::Cloning(int pratyid, int newAgentId, int CoalitionId){
-   return Agent(newAgentId,pratyid, mSelectionPolicy, CoalitionId);
+    SelectionPolicy* mSelectionPolicy2;
+    if(mSelectionPolicy->getType()=="M"){
+        mSelectionPolicy2=new MandatesSelectionPolicy;
+    }else{
+        mSelectionPolicy2=new EdgeWeightSelectionPolicy;
+    }
+   return Agent(newAgentId,pratyid, mSelectionPolicy2, CoalitionId);
 }
+
 
 int Agent:: getCoalitionId() const{
     return mCoalitionId;
