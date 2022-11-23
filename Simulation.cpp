@@ -75,10 +75,10 @@ Coalition& Simulation::getCoalition(int coalitionId){
 }
 
 //check:
-Party& Simulation::selectByEdgeWeight(int PartyId, int coalitionId){
-    int n = mGraph.getNumVertices();
+Party* Simulation::selectByEdgeWeight(int PartyId, int coalitionId){
+    int n = mGraph.getNumVertices()-1;
 int maxWeight = -1;
-Party& bestselect = mGraph.getParty(PartyId);
+Party* bestselect = &(mGraph.getParty(PartyId));
 for(int i=0; i < n; i++){
     int edgeWeight = mGraph.getEdgeWeight(PartyId,i);
     if(edgeWeight>0){
@@ -88,13 +88,13 @@ for(int i=0; i < n; i++){
                 if(temp.getState()==State::CollectingOffers){
                     if(!temp.isInOffers(coalitionId)){
                     maxWeight = edgeWeight;
-                    bestselect = temp;
+                    bestselect = &temp;
                     }
                 }
                 else{
                     //state Waiting
                     maxWeight = edgeWeight;
-                    bestselect = temp;
+                    bestselect = &temp;
                 }
             }
         }
@@ -103,11 +103,11 @@ for(int i=0; i < n; i++){
 return (bestselect);
 }
 
-Party& Simulation::selectByMandates(int PartyId, int coalitionId){
+Party* Simulation::selectByMandates(int PartyId, int coalitionId){
 
-int n =  mGraph.getNumVertices();
+int n =  mGraph.getNumVertices()-1;
 int maxMand = -1;
-Party& bestselect = mGraph.getParty(PartyId);
+Party* bestselect = &(mGraph.getParty(PartyId));
 
 for(int i=0; i < n; i++){
     if(mGraph.getEdgeWeight(PartyId,i)>0){
@@ -117,13 +117,13 @@ for(int i=0; i < n; i++){
                 if(temp.getState()==State::CollectingOffers){
                     if(!temp.isInOffers(coalitionId)){
                     maxMand = temp.getMandates();
-                    bestselect = temp;
+                    bestselect = &temp;
                     }
                 }
                 else{
                     //state Waiting
                     maxMand = temp.getMandates();
-                    bestselect = temp;
+                    bestselect = &temp;
                 }
             }
         }
