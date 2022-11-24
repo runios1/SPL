@@ -21,22 +21,20 @@ else
 
 // copy assignment 
 Agent& Agent :: operator=(const Agent& other){
-    if(this != &other){
-        this->mAgentId = other.mAgentId;
-        this->mPartyId = other.mPartyId;
-        this->mCoalitionId=other.mCoalitionId;
-        if(other.mSelectionPolicy->getType()=="M")
-            mSelectionPolicy=new MandatesSelectionPolicy;
-        else
-            mSelectionPolicy=new EdgeWeightSelectionPolicy;
-    }
+this->mAgentId = other.mAgentId;
+this->mPartyId = other.mPartyId;
+
+if(other.mSelectionPolicy->getType()=="M")
+    mSelectionPolicy=new MandatesSelectionPolicy;
+else
+    mSelectionPolicy=new EdgeWeightSelectionPolicy;
+
 return *this;
 }
 
 //destructor
 Agent::~Agent(){
-    if(mSelectionPolicy !=nullptr)
-        delete mSelectionPolicy;
+    delete mSelectionPolicy;
 }
 
 //move constructor
@@ -50,7 +48,6 @@ Agent& Agent::operator=(Agent&& other) noexcept
 { 
     mAgentId=other.mAgentId;
     mPartyId=other.mPartyId;
-    mCoalitionId=other.mCoalitionId;
     mSelectionPolicy=other.mSelectionPolicy;
     other.mSelectionPolicy=nullptr;
     return *this;
@@ -69,22 +66,14 @@ int Agent::getPartyId() const
 void Agent::step(Simulation &sim)
 {
     Party* temp = mSelectionPolicy-> Select(mPartyId, mCoalitionId,sim);
-    if (temp->getIdOfParty() != mPartyId){
-        temp->addToOffers(sim.getCoalition(mCoalitionId));
-        temp=nullptr;
-    }temp=nullptr;
+    temp->addToOffers(sim.getCoalition(mCoalitionId));
+    temp=nullptr;
 }
 
 Agent Agent::Cloning(int pratyid, int newAgentId, int CoalitionId){
-    SelectionPolicy* mSelectionPolicy2;
-    if(mSelectionPolicy->getType()=="M"){
-        mSelectionPolicy2=new MandatesSelectionPolicy;
-    }else{
-        mSelectionPolicy2=new EdgeWeightSelectionPolicy;
-    }
-   return Agent(newAgentId,pratyid, mSelectionPolicy2, CoalitionId);
+   Agent a= Agent(newAgentId,pratyid, mSelectionPolicy, CoalitionId);
+    return a;
 }
-
 
 int Agent:: getCoalitionId() const{
     return mCoalitionId;
