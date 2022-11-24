@@ -20,22 +20,21 @@ Party::Party(const Party& other): mId(other.mId), mName(other.mName), mMandates(
 
 // copy assignment 
 Party& Party :: operator=(const Party& other){
-    if(this != &other){
-        this->mId = other.mId;
-        this->mName = other.mName;
-        this->mMandates = other.mMandates;
-        this->mState = other.mState;
-        this->timer = other.timer;
+this->mId = other.mId;
+this->mName = other.mName;
+this->mMandates = other.mMandates;
+//this->mJoinPolicy = other.mJoinPolicy;
 
-    if(other.mJoinPolicy->getType()=="M"){
-            mJoinPolicy=new MandatesJoinPolicy;
-    }else{
-            mJoinPolicy=new LastOfferJoinPolicy;
-    }
+if(other.mJoinPolicy->getType()=="M")
+        mJoinPolicy=new MandatesJoinPolicy;
+    else
+        mJoinPolicy=new LastOfferJoinPolicy;
 
-    for(Coalition c:other.offers){
-    offers.push_back(c);
-    }
+this->mState = other.mState;
+this->timer = other.timer;
+
+for(Coalition c:other.offers){
+   offers.push_back(c);
 }
 
 return *this;
@@ -43,8 +42,7 @@ return *this;
 
 //destructor
 Party::~Party(){
-    if(mJoinPolicy!=nullptr)
-        delete mJoinPolicy;
+    delete mJoinPolicy;
 }
 
 
@@ -61,12 +59,9 @@ Party& Party::operator=(Party&& other) noexcept
     mName=other.mName;
     mJoinPolicy=other.mJoinPolicy;
     other.mJoinPolicy=nullptr;
-    mState = other.mState;
-    timer = other.timer;    
     
     return *this;
 }
-
 
 
 State Party::getState() const
@@ -115,6 +110,3 @@ bool Party::isInOffers(int coalitionId) const{
     return false;
 }
 
-int Party::getIdOfParty() const{
-    return mId;
-}
