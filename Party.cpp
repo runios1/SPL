@@ -13,7 +13,7 @@ Party::Party(const Party& other): mId(other.mId), mName(other.mName), mMandates(
     else
         mJoinPolicy=new LastOfferJoinPolicy;
 
-    for(Coalition c:other.offers){
+    for(int c:other.offers){
         offers.push_back(c);
     }
 }
@@ -33,7 +33,7 @@ Party& Party :: operator=(const Party& other){
             mJoinPolicy=new LastOfferJoinPolicy;
     }
 
-    for(Coalition c:other.offers){
+    for(int c:other.offers){
     offers.push_back(c);
     }
 }
@@ -94,21 +94,21 @@ void Party::step(Simulation &s)
     if(mState==State::CollectingOffers){
         timer++;
         if(timer==4){
-        mJoinPolicy->Join(offers,mMandates,mId,s.getCurrentId());
+        mJoinPolicy->Join(s,offers,mMandates,mId,s.getCurrentId());
         setState(State::Joined);
         }
     }
 }
 
-void Party::addToOffers(Coalition& coalition){
-    offers.push_back(coalition);
+void Party::addToOffers(int coalitionId){
+    offers.push_back(coalitionId);
     if(mState==State::Waiting)
         setState(State::CollectingOffers);
 }
 
 bool Party::isInOffers(int coalitionId) const{
-    for(Coalition a : offers){
-        if( coalitionId == a.getId()){
+    for(int a : offers){
+        if( coalitionId == a){
             return true;
         }
     }
