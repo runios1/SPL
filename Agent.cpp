@@ -70,8 +70,7 @@ void Agent::step(Simulation &sim)
 {
     Party* temp = mSelectionPolicy-> Select(mPartyId, mCoalitionId,sim);
     if (temp->getIdOfParty() != mPartyId){
-        temp->addToOffers(sim.getCoalition(mCoalitionId));
-        temp=nullptr;
+        temp->addToOffers(mCoalitionId);
     }temp=nullptr;
 }
 
