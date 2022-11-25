@@ -1,13 +1,9 @@
 #include "JoinPolicy.h"
+#include "Simulation.h"
 
 //virtual
-void LastOfferJoinPolicy::Join(vector<Coalition>& offers, int partyMandates, int partyid, int newAgentid){
-    Coalition& bestOffer= offers[offers.size()-1];
-
-    // Creates a new agent in the new party in the coalition.
-    Agent a=*bestOffer.getAgent();
-    Agent b=std::move(a.Cloning(partyid,newAgentid,a.getCoalitionId()));
-    bestOffer.JoinCoalition(b,partyMandates);
+void LastOfferJoinPolicy::Join(Simulation sim,vector<int>& offers, int partyMandates, int partyid, int newAgentid){
+    sim.joinByLastOffer(offers, partyMandates, partyid, newAgentid);
 } 
 string LastOfferJoinPolicy::getType(){
     return "L";
