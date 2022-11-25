@@ -33,7 +33,7 @@ public:
     void step(Simulation &s);
     const string &getName() const;
     int getIdOfParty() const;
-    void addToOffers(Coalition& coalition);
+    void addToOffers(int coalitionId);
     bool isInOffers(int coalitionId) const;
 
 private:
@@ -43,5 +43,5 @@ private:
     JoinPolicy *mJoinPolicy;
     State mState;
     int timer;
-    vector <Coalition> offers;
+    vector <int> offers; //stores all the coalitions that offered to the party by id.
 };
