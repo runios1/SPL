@@ -10,9 +10,6 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgen
         coalitions.push_back(Coalition(mGraph.getMandates(a.getPartyId()), a, i));
         i++;
     }
-    // You can change the implementation of the constructor, but not the signature!
-    // we need to run on the vector of agents - for each agent create a coalition and push it to the vector of coalitions
-    // after the creation of the coalition - we need to update coalitionId of the agent
 }
 
 void Simulation::step()
@@ -55,10 +52,10 @@ const Party &Simulation::getParty(int partyId) const
 const vector<vector<int>> Simulation::getPartiesByCoalitions() const
 {
     vector<vector<int>> output;
-    for(Coalition c:coalitions){
+    for(unsigned int j=0;j<coalitions.size();j++){
         vector<int> partyIds;
-        for(int i=0;c.getNumAgents()-1;i++){
-            partyIds.push_back(c.getAgent(i)->getPartyId());
+        for(int i=0;i<coalitions[j].getNumAgents();i++){
+            partyIds.push_back(coalitions[j].getAgent(i)->getPartyId());
         }
         output.push_back(partyIds);
         partyIds.clear();
@@ -68,10 +65,6 @@ const vector<vector<int>> Simulation::getPartiesByCoalitions() const
 
 int Simulation::getCurrentId(){
     return mAgents.size();
-}
-
-Coalition& Simulation::getCoalition(int coalitionId){
-    return coalitions[coalitionId];
 }
 
 //check:
@@ -131,4 +124,31 @@ for(int i=0; i < n; i++){
 }
 return (bestselect);
 
+}
+
+void Simulation::joinByMandates(vector<int>& offers,int partyMandates, int partyid, int newAgentid){
+    int maxMend(-1);
+    int maxIndex(0);
+    unsigned int i(0);
+
+    while(i<offers.size()){
+        if(coalitions[offers[i]].getMandates()>maxMend){
+            maxMend=coalitions[offers[i]].getMandates();
+            maxIndex=i;
+        }
+        i++;
+    }
+    // Creates a new agent in the new party in the coalition.
+    Agent* a=coalitions[offers[maxIndex]].getAgent();
+    Agent b=std::move(a->Cloning(partyid,newAgentid,a->getCoalitionId()));
+    mAgents.push_back(b);
+    coalitions[offers[maxIndex]].JoinCoalition(b,partyMandates);
+    a=nullptr;
+}
+void Simulation::joinByLastOffer(vector<int>& offers, int partyMandates, int partyid, int newAgentid){
+    Agent* a=coalitions[offers[offers.size()-1]].getAgent();
+    Agent b=std::move(a->Cloning(partyid,newAgentid,a->getCoalitionId()));
+    mAgents.push_back(b);
+    coalitions[offers[offers.size()-1]].JoinCoalition(b,partyMandates);
+    a=nullptr;
 }
