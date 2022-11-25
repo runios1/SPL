@@ -10,7 +10,7 @@ class Coalition{
         
         void JoinCoalition(Agent& duplicatedAgent,int partyMandates);
         Agent* getAgent();
-        Agent* getAgent(int agentId);
+        const Agent* getAgent(int agentId) const;
         int getMandates();
         int getId();
         int getNumAgents() const;
