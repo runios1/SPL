@@ -14,7 +14,7 @@ Agent* Coalition::getAgent(){
     return &mAgents[0];
 }
 
-Agent* Coalition::getAgent(int agentId){
+const Agent* Coalition::getAgent(int agentId) const{
     return &mAgents[agentId];
 }
 
